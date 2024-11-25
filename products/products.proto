@@ -1,0 +1,214 @@
+syntax = "proto3";
+
+package products;
+
+option go_package = "pkg/gednerated/products";
+
+import "google/protobuf/empty.proto";
+
+message Message {
+  string message = 1;
+}
+
+message Category {
+  string id = 1;
+  string name = 2;
+  string created_by = 3;
+  string created_at = 4;
+}
+
+message CreateCategoryRequest {
+  string name = 1;
+  string created_by = 2;
+}
+
+message GetCategoryRequest {
+  string id = 1;
+}
+
+message CategoryList {
+  repeated Category categories = 1;
+}
+
+message Product {
+  string id = 1;
+  string category_id = 2;
+  string name = 3;
+  string bill_format = 4;
+  float incoming_price = 5;
+  float standard_price = 6;
+  int64 total_count = 7;
+  string created_by = 8;
+  string created_at = 9;
+}
+
+message CreateProductRequest {
+  string category_id = 1;
+  string name = 2;
+  string bill_format = 3;
+  float incoming_price = 4;
+  float standard_price = 5;
+  string created_by = 6;
+}
+
+message UpdateProductRequest {
+  string id = 1;
+  string category_id = 2;
+  string name = 3;
+  string bill_format = 4;
+  float incoming_price = 5;
+  float standard_price = 6;
+}
+
+message GetProductRequest {
+  string id = 1;
+}
+
+message ProductFilter {
+  string category_id = 1;
+  string name = 2;
+  string created_by = 3;
+  string created_at = 4;
+}
+
+message ProductList {
+  repeated Product products = 1;
+}
+
+message PurchaseItem {
+  string product_id = 1;
+  int32 quantity = 2;
+  double purchase_price = 3;
+}
+
+message PurchaseRequest {
+  string supplier_id = 1;
+  string purchased_by = 2;
+  string description = 3;
+  string payment_method = 4;
+  repeated PurchaseItem items = 5;
+}
+
+message PurchaseResponse {
+  string id = 1;
+  string supplier_id = 2;
+  string purchased_by = 3;
+  double total_cost = 4;
+  string description = 5;
+  string payment_method = 6;
+  string created_at = 7;
+  repeated PurchaseItemResponse items = 8;
+}
+
+message PurchaseItemResponse {
+  string id = 1;
+  string purchase_id = 2;
+  string product_id = 3;
+  int32 quantity = 4;
+  double purchase_price = 5;
+  double total_price = 6;
+}
+
+message PurchaseID {
+  string id = 1;
+}
+
+message FilterPurchase {
+  string product_id = 1;
+  string supplier_id = 2;
+  string purchased_by = 3;
+  string created_at = 4;
+}
+
+message PurchaseList {
+  repeated PurchaseResponse purchases = 1;
+}
+
+message PurchaseUpdate {
+  string id = 1;
+  string supplier_id = 2;
+  string description = 3;
+  string payment_method = 4;
+}
+
+message SalesItem {
+  string id = 1;
+  string sale_id = 2;
+  string product_id = 3;
+  int32 quantity = 4;
+  double sale_price = 5;
+  double total_price = 6;
+}
+
+message SaleRequest {
+  string client_id = 1;
+  string sold_by = 2;
+  string payment_method = 3;
+  repeated SalesItem sold_products = 4;
+}
+
+message SaleResponse {
+  string id = 1;
+  string client_id = 2;
+  string sold_by = 3;
+  double total_sale_price = 4;
+  string payment_method = 5;
+  string created_at = 6;
+  repeated SalesItem sold_products = 7;
+}
+
+message SaleUpdate {
+  string id = 1;
+  string client_id = 2;
+  string payment_method = 3;
+}
+
+message SaleID {
+  string id = 1;
+}
+
+message SaleFilter {
+  string start_date = 1;
+  string end_date = 2;
+  string client_id = 3;
+  string sold_by = 4;
+}
+
+message SaleList {
+  repeated SaleResponse sales = 1;
+}
+
+message Error {
+  string error = 1;
+}
+
+service Products {
+
+  // ------------ Product Category ----------------------------
+  rpc CreateCategory(CreateCategoryRequest) returns (Category);
+  rpc DeleteCategory(GetCategoryRequest) returns (Message);
+  rpc GetCategory(GetCategoryRequest) returns (Category);
+  rpc GetListCategory(google.protobuf.Empty) returns (CategoryList);
+
+  // ------------- Products ---------------------------------------
+  rpc CreateProduct(CreateProductRequest) returns (Product);
+  rpc UpdateProduct(UpdateProductRequest) returns (Product);
+  rpc DeleteProduct(GetProductRequest) returns (Message);
+  rpc GetProduct(GetProductRequest) returns (Product);
+  rpc GetProductList(ProductFilter) returns (ProductList);
+
+  // -------------- Purchase --------------------------------------
+  rpc CreatePurchase(PurchaseRequest) returns (PurchaseResponse);
+  rpc GetPurchase(PurchaseID) returns (PurchaseResponse);
+  rpc GetListPurchase(FilterPurchase) returns (PurchaseList);
+  rpc UpdatePurchase(PurchaseUpdate) returns (PurchaseResponse);
+  rpc DeletePurchase(PurchaseID) returns (Message);
+
+  // ------------------ Sales --------------------------------------
+  rpc CalculateTotalSales(SaleRequest) returns (SaleResponse);
+  rpc CreateSales(SaleRequest) returns (SaleResponse);
+  rpc UpdateSales(SaleUpdate) returns (SaleResponse);
+  rpc GetSales(SaleID) returns (SaleResponse);
+  rpc GetListSales(SaleFilter) returns (SaleList);
+  rpc DeleteSales(SaleID) returns (Message);
+}
