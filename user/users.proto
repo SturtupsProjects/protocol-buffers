@@ -1,0 +1,74 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "pkg/generated/user";
+
+
+// Define the service and its RPC methods
+service AuthService {
+  rpc RegisterAdmin (MessageResponse) returns (MessageResponse);
+  rpc AddUser (UserRequest) returns (UserResponse);
+  rpc GetUser (UserIDRequest) returns (UserResponse);
+  rpc UpdateUser (UserRequest) returns (UserResponse);
+  rpc GetUserList (FilterUserRequest) returns (UserListResponse);
+  rpc DeleteUser (UserIDRequest) returns (MessageResponse);
+  rpc LogIn (LogInRequest) returns (TokenResponse);
+}
+
+// Messages
+message MessageResponse {
+  string message = 1;
+}
+
+
+message UserRequest {
+  string user_id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string email = 4;
+  string password = 5;
+  string phone_number = 6;
+  string role = 7;
+}
+
+message UserResponse {
+  string user_id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string email = 4;
+  string phone_number = 5;
+  string role = 6;
+  string created_at = 7;
+}
+
+message UserIDRequest {
+  string id = 1;
+}
+
+message FilterUserRequest {
+  string first_name = 1;
+  string last_name = 2;
+  string role = 3;
+}
+
+message UserListResponse {
+  repeated UserResponse users = 1;
+}
+
+message LogInRequest {
+  string phone_number = 1;
+  string password = 2;
+}
+
+message TokenResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+  int32 expire_at = 3;
+}
+message LogInResponse {
+  string user_id = 1;
+  string first_name = 2;
+  string phone_number = 3;
+  string role = 4;
+}
