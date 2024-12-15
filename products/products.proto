@@ -182,13 +182,18 @@ message Error {
   string error = 1;
 }
 
+message CategoryName {
+  string name = 1;
+  string created_by = 2;
+}
+
 service Products {
 
   // ------------ Product Category ----------------------------
   rpc CreateCategory(CreateCategoryRequest) returns (Category);
   rpc DeleteCategory(GetCategoryRequest) returns (Message);
   rpc GetCategory(GetCategoryRequest) returns (Category);
-  rpc GetListCategory(google.protobuf.Empty) returns (CategoryList);
+  rpc GetListCategory(CategoryName) returns (CategoryList);
 
   // ------------- Products ---------------------------------------
   rpc CreateProduct(CreateProductRequest) returns (Product);
