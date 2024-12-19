@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package debts;
+
+option go_package = "internal/generated/debts";
+
+service DebtsService {
+  // ----------------------- clients ------------------
+  rpc AddClient(CreateClients) returns (Client);
+  rpc GetClient(ClientID) returns (Client);
+  rpc UpdateClient(ClientUpdate) returns (Client);
+  rpc GetAllClients(FilterClient) returns (ClientList);
+}
+
+message ClientList {
+  repeated Client clients = 1;
+}
+
+message FilterClient {
+  string full_name = 2;
+  string phone_number = 3;
+  string address = 4;
+  string telegram_username = 5;
+  string has_debt = 7;
+  string client_status = 8;
+  string notes = 9;
+  int32 page = 10;
+  int32 offset = 11;
+}
+
+message ClientUpdate {
+  string id = 1;
+  string full_name = 2;
+  string phone_number = 3;
+  string address = 4;
+  string has_debt = 5;
+  string notes = 6;
+}
+
+message ClientID {
+  string id = 1;
+}
+
+message Client {
+  string id = 1;
+  string full_name = 2;
+  string phone_number = 3;
+  string address = 4;
+  string telegram_username = 5;
+  string telegram_user_id = 6;
+  string has_debt = 7;
+  string client_status = 8;
+  string notes = 9;
+  string created_at = 10;
+}
+
+message CreateClients {
+  string id = 1;
+  string full_name = 2;
+  string phone_number = 3;
+  string address = 4;
+  string telegram_username = 5;
+  string notes = 6;
+}
+
