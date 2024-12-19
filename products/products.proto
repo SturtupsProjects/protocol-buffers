@@ -2,9 +2,7 @@ syntax = "proto3";
 
 package products;
 
-option go_package = "pkg/generated/products";
-
-import "google/protobuf/empty.proto";
+option go_package = "internal/generated/products";
 
 message Message {
   string message = 1;
@@ -35,8 +33,8 @@ message Product {
   string category_id = 2;
   string name = 3;
   string bill_format = 4;
-  float incoming_price = 5;
-  float standard_price = 6;
+  int64 incoming_price = 5;
+  int64 standard_price = 6;
   int64 total_count = 7;
   string created_by = 8;
   string created_at = 9;
@@ -46,8 +44,8 @@ message CreateProductRequest {
   string category_id = 1;
   string name = 2;
   string bill_format = 3;
-  float incoming_price = 4;
-  float standard_price = 5;
+  int64 incoming_price = 4;
+  int64 standard_price = 5;
   string created_by = 6;
 }
 
@@ -56,8 +54,8 @@ message UpdateProductRequest {
   string category_id = 2;
   string name = 3;
   string bill_format = 4;
-  float incoming_price = 5;
-  float standard_price = 6;
+  int64 incoming_price = 5;
+  int64 standard_price = 6;
 }
 
 message GetProductRequest {
@@ -78,7 +76,7 @@ message ProductList {
 message PurchaseItem {
   string product_id = 1;
   int32 quantity = 2;
-  double purchase_price = 3;
+  int64 purchase_price = 3;
 }
 
 message PurchaseRequest {
@@ -93,7 +91,7 @@ message PurchaseResponse {
   string id = 1;
   string supplier_id = 2;
   string purchased_by = 3;
-  double total_cost = 4;
+  int64 total_cost = 4;
   string description = 5;
   string payment_method = 6;
   string created_at = 7;
@@ -105,8 +103,8 @@ message PurchaseItemResponse {
   string purchase_id = 2;
   string product_id = 3;
   int32 quantity = 4;
-  double purchase_price = 5;
-  double total_price = 6;
+  int64 purchase_price = 5;
+  int64 total_price = 6;
 }
 
 message PurchaseID {
@@ -136,8 +134,8 @@ message SalesItem {
   string sale_id = 2;
   string product_id = 3;
   int32 quantity = 4;
-  double sale_price = 5;
-  double total_price = 6;
+  int64 sale_price = 5;
+  int64 total_price = 6;
 }
 
 message SaleRequest {
@@ -151,7 +149,7 @@ message SaleResponse {
   string id = 1;
   string client_id = 2;
   string sold_by = 3;
-  double total_sale_price = 4;
+  int64 total_sale_price = 4;
   string payment_method = 5;
   string created_at = 6;
   repeated SalesItem sold_products = 7;
@@ -184,7 +182,6 @@ message Error {
 
 message CategoryName {
   string name = 1;
-  string created_by = 2;
 }
 
 service Products {
