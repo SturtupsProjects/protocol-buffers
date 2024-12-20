@@ -2,30 +2,106 @@ syntax = "proto3";
 
 package debts;
 
+
 option go_package = "internal/generated/debts";
 
+// ----------------------- Service --------------------
 service DebtsService {
-  // ----------------------- clients ------------------
+
   rpc AddClient(CreateClients) returns (Client);
   rpc GetClient(ClientID) returns (Client);
   rpc UpdateClient(ClientUpdate) returns (Client);
   rpc GetAllClients(FilterClient) returns (ClientList);
+
+  rpc CreateDebt(DebtRequest) returns (Debt);
+  rpc GetDebt(DebtID) returns (Debt);
+  rpc PayDebt(PayDebtReq) returns (Debt);
+  rpc GetListDebts(FilterDebt) returns (DebtsList);
+  rpc GetClientDebts(ClientID) returns (DebtsList);
+
+  rpc GetPayment(PaymentID) returns (Payment);
+  rpc GetPaymentsByDebtId(DebtID) returns (PaymentList);
+  rpc GetPayments(FilterPayment) returns (PaymentList);
 }
 
+// ----------------------- Messages -------------------
+
+message PaymentList {
+  repeated Payment payments = 1;
+}
+
+message Payment {
+  string id = 1;
+  string installment_id = 2;
+  string payment_date = 3;
+  int64 payment_amount = 4;
+  string created_at = 5;
+}
+
+message PaymentID {
+  string id = 1;
+}
+
+message FilterPayment {
+  string installment_id = 1;
+  string start_date = 2;
+  string end_date = 3;
+}
+
+// Debt Messages
+message DebtsList {
+  repeated Debt debts = 1;
+}
+
+message FilterDebt {
+  int32 months_duration = 1;
+  string created_after = 2;
+  string created_before = 3;
+  int64 total_amount_min = 4;
+  int64 total_amount_max = 5;
+}
+
+message PayDebtReq {
+  string debt_id = 1;
+  int64 paid_amount = 2;
+}
+
+message DebtID {
+  string id = 1;
+}
+
+message Debt {
+  string id = 1;
+  int32 months_duration = 2;
+  int32 present_month = 3;
+  int64 total_amount = 4;
+  int64 amount_paid = 5;
+  string last_payment_date = 6;
+  bool is_fully_paid = 7;
+  string created_at = 8;
+}
+
+message DebtRequest {
+  int32 months_duration = 1;
+  string client_id = 2;
+  int64 total_amount = 3;
+}
+
+// Client Messages
 message ClientList {
   repeated Client clients = 1;
 }
 
 message FilterClient {
-  string full_name = 2;
-  string phone_number = 3;
-  string address = 4;
-  string telegram_username = 5;
-  string has_debt = 7;
-  string client_status = 8;
-  string notes = 9;
-  int32 page = 10;
-  int32 offset = 11;
+  string full_name = 1;
+  string phone_number = 2;
+  string address = 3;
+  string telegram_username = 4;
+  bool has_debt = 5;
+  string client_status = 6;
+  string notes = 7;
+  int32 page = 8;
+  int32 offset = 9;
 }
 
 message ClientUpdate {
@@ -33,7 +109,7 @@ message ClientUpdate {
   string full_name = 2;
   string phone_number = 3;
   string address = 4;
-  string has_debt = 5;
+  bool has_debt = 5;
   string notes = 6;
 }
 
@@ -48,7 +124,7 @@ message Client {
   string address = 4;
   string telegram_username = 5;
   string telegram_user_id = 6;
-  string has_debt = 7;
+  bool has_debt = 7;
   string client_status = 8;
   string notes = 9;
   string created_at = 10;
@@ -62,4 +138,3 @@ message CreateClients {
   string telegram_username = 5;
   string notes = 6;
 }
-
