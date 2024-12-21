@@ -11,13 +11,15 @@ message Message {
 message Category {
   string id = 1;
   string name = 2;
-  string created_by = 3;
-  string created_at = 4;
+  string image_url = 3;
+  string created_by = 4;
+  string created_at = 5;
 }
 
 message CreateCategoryRequest {
   string name = 1;
-  string created_by = 2;
+  string image_url = 2;
+  string created_by = 3;
 }
 
 message GetCategoryRequest {
@@ -33,20 +35,22 @@ message Product {
   string category_id = 2;
   string name = 3;
   string bill_format = 4;
-  int64 incoming_price = 5;
-  int64 standard_price = 6;
-  int64 total_count = 7;
-  string created_by = 8;
-  string created_at = 9;
+  string image_url = 5;
+  int64 incoming_price = 6;
+  int64 standard_price = 7;
+  int64 total_count = 8;
+  string created_by = 9;
+  string created_at = 10;
 }
 
 message CreateProductRequest {
   string category_id = 1;
   string name = 2;
   string bill_format = 3;
-  int64 incoming_price = 4;
-  int64 standard_price = 5;
-  string created_by = 6;
+  string image_url = 4;
+  int64 incoming_price = 5;
+  int64 standard_price = 6;
+  string created_by = 7;
 }
 
 message UpdateProductRequest {
