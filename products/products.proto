@@ -57,9 +57,10 @@ message UpdateProductRequest {
   string id = 1;
   string category_id = 2;
   string name = 3;
-  string bill_format = 4;
-  int64 incoming_price = 5;
-  int64 standard_price = 6;
+  string image_url = 4;
+  string bill_format = 5;
+  int64 incoming_price = 6;
+  int64 standard_price = 7;
 }
 
 message GetProductRequest {
