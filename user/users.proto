@@ -66,6 +66,7 @@ message UserRequest {
   string password = 5;
   string phone_number = 6;
   string role = 7;
+  string company_id = 8;
 }
 
 message UserResponse {
@@ -75,7 +76,8 @@ message UserResponse {
   string email = 4;
   string phone_number = 5;
   string role = 6;
-  string created_at = 7;
+  string company_id = 7;
+  string created_at = 8;
 }
 
 message UserIDRequest {
@@ -107,4 +109,5 @@ message LogInResponse {
   string first_name = 2;
   string phone_number = 3;
   string role = 4;
+  string company_id = 5;
 }
