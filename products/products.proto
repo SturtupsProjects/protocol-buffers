@@ -2,9 +2,10 @@ syntax = "proto3";
 
 package products;
 
-option go_package = "pkg/generated/products";
+option go_package = "internal/generated/products";
 
 // -------------------- Common Messages --------------------------
+
 message Message {
   string message = 1;
 }
@@ -18,14 +19,16 @@ message Category {
   string id = 1;
   string name = 2;
   string company_id = 3; // Company ID added
-  string created_by = 4;
-  string created_at = 5;
+  string image_url = 4;
+  string created_by = 5;
+  string created_at = 6;
 }
 
 message CreateCategoryRequest {
   string name = 1;
   string company_id = 2; // Company ID added
-  string created_by = 3;
+  string image_url = 3;
+  string created_by = 4;
 }
 
 message GetCategoryRequest {
@@ -47,32 +50,35 @@ message Product {
   string category_id = 2;
   string name = 3;
   string bill_format = 4;
-  float incoming_price = 5;
-  float standard_price = 6;
+  int64 incoming_price = 5;
+  int64 standard_price = 6;
   int64 total_count = 7;
   string company_id = 8; // Company ID added
-  string created_by = 9;
-  string created_at = 10;
+  string image_url = 9;
+  string created_by = 10;
+  string created_at = 11;
 }
 
 message CreateProductRequest {
   string category_id = 1;
   string name = 2;
   string bill_format = 3;
-  float incoming_price = 4;
-  float standard_price = 5;
-  string company_id = 6; // Company ID added
-  string created_by = 7;
+  string image_url = 4;
+  int64 incoming_price = 5;
+  int64 standard_price = 6;
+  string company_id = 7;
+  string created_by = 8;
 }
 
 message UpdateProductRequest {
   string id = 1;
   string category_id = 2;
   string name = 3;
-  string bill_format = 4;
-  float incoming_price = 5;
-  float standard_price = 6;
-  string company_id = 7; // Company ID added
+  string image_url = 4;
+  string bill_format = 5;
+  int64 incoming_price = 6;
+  int64 standard_price = 7;
+  string company_id = 8; // Company ID added
 }
 
 message GetProductRequest {
@@ -95,7 +101,7 @@ message ProductList {
 message PurchaseItem {
   string product_id = 1;
   int32 quantity = 2;
-  double purchase_price = 3;
+  int64 purchase_price = 3;
 }
 
 message PurchaseRequest {
@@ -111,7 +117,7 @@ message PurchaseResponse {
   string id = 1;
   string supplier_id = 2;
   string purchased_by = 3;
-  double total_cost = 4;
+  int64 total_cost = 4;
   string description = 5;
   string payment_method = 6;
   string company_id = 7; // Company ID added
@@ -124,8 +130,8 @@ message PurchaseItemResponse {
   string purchase_id = 2;
   string product_id = 3;
   int32 quantity = 4;
-  double purchase_price = 5;
-  double total_price = 6;
+  int64 purchase_price = 5;
+  int64 total_price = 6;
 }
 
 message PurchaseID {
@@ -158,8 +164,8 @@ message SalesItem {
   string sale_id = 2;
   string product_id = 3;
   int32 quantity = 4;
-  double sale_price = 5;
-  double total_price = 6;
+  int64 sale_price = 5;
+  int64 total_price = 6;
 }
 
 message SaleRequest {
@@ -174,7 +180,7 @@ message SaleResponse {
   string id = 1;
   string client_id = 2;
   string sold_by = 3;
-  double total_sale_price = 4;
+  int64 total_sale_price = 4;
   string payment_method = 5;
   string company_id = 6; // Company ID added
   string created_at = 7;
