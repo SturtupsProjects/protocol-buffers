@@ -4,22 +4,28 @@ package products;
 
 option go_package = "pkg/generated/products";
 
-import "google/protobuf/empty.proto";
-
+// -------------------- Common Messages --------------------------
 message Message {
   string message = 1;
 }
 
+message Error {
+  string error = 1;
+}
+
+// -------------------- Product Categories -----------------------
 message Category {
   string id = 1;
   string name = 2;
-  string created_by = 3;
-  string created_at = 4;
+  string company_id = 3; // Company ID added
+  string created_by = 4;
+  string created_at = 5;
 }
 
 message CreateCategoryRequest {
   string name = 1;
-  string created_by = 2;
+  string company_id = 2; // Company ID added
+  string created_by = 3;
 }
 
 message GetCategoryRequest {
@@ -30,6 +36,12 @@ message CategoryList {
   repeated Category categories = 1;
 }
 
+message CategoryName {
+  string name = 1;
+  string company_id = 2; // Company ID added
+}
+
+// -------------------- Products ---------------------------------
 message Product {
   string id = 1;
   string category_id = 2;
@@ -38,8 +50,9 @@ message Product {
   float incoming_price = 5;
   float standard_price = 6;
   int64 total_count = 7;
-  string created_by = 8;
-  string created_at = 9;
+  string company_id = 8; // Company ID added
+  string created_by = 9;
+  string created_at = 10;
 }
 
 message CreateProductRequest {
@@ -48,7 +61,8 @@ message CreateProductRequest {
   string bill_format = 3;
   float incoming_price = 4;
   float standard_price = 5;
-  string created_by = 6;
+  string company_id = 6; // Company ID added
+  string created_by = 7;
 }
 
 message UpdateProductRequest {
@@ -58,6 +72,7 @@ message UpdateProductRequest {
   string bill_format = 4;
   float incoming_price = 5;
   float standard_price = 6;
+  string company_id = 7; // Company ID added
 }
 
 message GetProductRequest {
@@ -67,14 +82,16 @@ message GetProductRequest {
 message ProductFilter {
   string category_id = 1;
   string name = 2;
-  string created_by = 3;
-  string created_at = 4;
+  string company_id = 3; // Company ID added
+  string created_by = 4;
+  string created_at = 5;
 }
 
 message ProductList {
   repeated Product products = 1;
 }
 
+// -------------------- Purchases --------------------------------
 message PurchaseItem {
   string product_id = 1;
   int32 quantity = 2;
@@ -86,7 +103,8 @@ message PurchaseRequest {
   string purchased_by = 2;
   string description = 3;
   string payment_method = 4;
-  repeated PurchaseItem items = 5;
+  string company_id = 5; // Company ID added
+  repeated PurchaseItem items = 6;
 }
 
 message PurchaseResponse {
@@ -96,8 +114,9 @@ message PurchaseResponse {
   double total_cost = 4;
   string description = 5;
   string payment_method = 6;
-  string created_at = 7;
-  repeated PurchaseItemResponse items = 8;
+  string company_id = 7; // Company ID added
+  string created_at = 8;
+  repeated PurchaseItemResponse items = 9;
 }
 
 message PurchaseItemResponse {
@@ -117,7 +136,8 @@ message FilterPurchase {
   string product_id = 1;
   string supplier_id = 2;
   string purchased_by = 3;
-  string created_at = 4;
+  string company_id = 4; // Company ID added
+  string created_at = 5;
 }
 
 message PurchaseList {
@@ -129,8 +149,10 @@ message PurchaseUpdate {
   string supplier_id = 2;
   string description = 3;
   string payment_method = 4;
+  string company_id = 5; // Company ID added
 }
 
+// -------------------- Sales ------------------------------------
 message SalesItem {
   string id = 1;
   string sale_id = 2;
@@ -144,7 +166,8 @@ message SaleRequest {
   string client_id = 1;
   string sold_by = 2;
   string payment_method = 3;
-  repeated SalesItem sold_products = 4;
+  string company_id = 4; // Company ID added
+  repeated SalesItem sold_products = 5;
 }
 
 message SaleResponse {
@@ -153,14 +176,16 @@ message SaleResponse {
   string sold_by = 3;
   double total_sale_price = 4;
   string payment_method = 5;
-  string created_at = 6;
-  repeated SalesItem sold_products = 7;
+  string company_id = 6; // Company ID added
+  string created_at = 7;
+  repeated SalesItem sold_products = 8;
 }
 
 message SaleUpdate {
   string id = 1;
   string client_id = 2;
   string payment_method = 3;
+  string company_id = 4; // Company ID added
 }
 
 message SaleID {
@@ -172,21 +197,16 @@ message SaleFilter {
   string end_date = 2;
   string client_id = 3;
   string sold_by = 4;
+  string company_id = 5; // Company ID added
 }
 
 message SaleList {
   repeated SaleResponse sales = 1;
 }
 
-message Error {
-  string error = 1;
-}
 
-message CategoryName {
-  string name = 1;
-  string created_by = 2;
-}
 
+// -------------------- Services ---------------------------------
 service Products {
 
   // ------------ Product Category ----------------------------
@@ -195,21 +215,21 @@ service Products {
   rpc GetCategory(GetCategoryRequest) returns (Category);
   rpc GetListCategory(CategoryName) returns (CategoryList);
 
-  // ------------- Products ---------------------------------------
+  // ------------- Products -----------------------------------
   rpc CreateProduct(CreateProductRequest) returns (Product);
   rpc UpdateProduct(UpdateProductRequest) returns (Product);
   rpc DeleteProduct(GetProductRequest) returns (Message);
   rpc GetProduct(GetProductRequest) returns (Product);
   rpc GetProductList(ProductFilter) returns (ProductList);
 
-  // -------------- Purchase --------------------------------------
+  // -------------- Purchases ---------------------------------
   rpc CreatePurchase(PurchaseRequest) returns (PurchaseResponse);
   rpc GetPurchase(PurchaseID) returns (PurchaseResponse);
   rpc GetListPurchase(FilterPurchase) returns (PurchaseList);
   rpc UpdatePurchase(PurchaseUpdate) returns (PurchaseResponse);
   rpc DeletePurchase(PurchaseID) returns (Message);
 
-  // ------------------ Sales --------------------------------------
+  // ------------------ Sales ---------------------------------
   rpc CalculateTotalSales(SaleRequest) returns (SaleResponse);
   rpc CreateSales(SaleRequest) returns (SaleResponse);
   rpc UpdateSales(SaleUpdate) returns (SaleResponse);
