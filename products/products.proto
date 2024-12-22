@@ -33,6 +33,7 @@ message CreateCategoryRequest {
 
 message GetCategoryRequest {
   string id = 1;
+  string company_id = 2; // Company ID added
 }
 
 message CategoryList {
@@ -66,7 +67,7 @@ message CreateProductRequest {
   string image_url = 4;
   int64 incoming_price = 5;
   int64 standard_price = 6;
-  string company_id = 7;
+  string company_id = 7; // Company ID added
   string created_by = 8;
 }
 
@@ -83,6 +84,7 @@ message UpdateProductRequest {
 
 message GetProductRequest {
   string id = 1;
+  string company_id = 2; // Company ID added
 }
 
 message ProductFilter {
@@ -136,6 +138,7 @@ message PurchaseItemResponse {
 
 message PurchaseID {
   string id = 1;
+  string company_id = 2; // Company ID added
 }
 
 message FilterPurchase {
@@ -196,6 +199,7 @@ message SaleUpdate {
 
 message SaleID {
   string id = 1;
+  string company_id = 2; // Company ID added
 }
 
 message SaleFilter {
@@ -209,8 +213,6 @@ message SaleFilter {
 message SaleList {
   repeated SaleResponse sales = 1;
 }
-
-
 
 // -------------------- Services ---------------------------------
 service Products {
