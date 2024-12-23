@@ -24,6 +24,14 @@ message Category {
   string created_at = 6;
 }
 
+message UpdateCategoryRequest {
+  string id = 1;
+  string name = 2;
+  string company_id = 3; // Company ID added
+  string image_url = 4;
+  string created_by = 5;
+}
+
 message CreateCategoryRequest {
   string name = 1;
   string company_id = 2; // Company ID added
@@ -219,6 +227,7 @@ service Products {
 
   // ------------ Product Category ----------------------------
   rpc CreateCategory(CreateCategoryRequest) returns (Category);
+  rpc UpdateCategory(UpdateCategoryRequest) returns (Category);
   rpc DeleteCategory(GetCategoryRequest) returns (Message);
   rpc GetCategory(GetCategoryRequest) returns (Category);
   rpc GetListCategory(CategoryName) returns (CategoryList);
