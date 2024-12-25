@@ -222,6 +222,22 @@ message SaleList {
   repeated SaleResponse sales = 1;
 }
 
+// ------------------ Statistics ---------------------------------
+message MostSoldProductsRequest {
+  string company_id = 1;
+  string start_date = 2; // ISO 8601 format: YYYY-MM-DD
+  string end_date = 3;   // ISO 8601 format: YYYY-MM-DD
+}
+
+message DailySales {
+  string day = 1;
+  map<string, int64> products = 2; // Product name -> total_quantity
+}
+
+message MostSoldProductsResponse {
+  repeated DailySales daily_sales = 1;
+}
+
 // -------------------- Services ---------------------------------
 service Products {
 
@@ -253,4 +269,8 @@ service Products {
   rpc GetSales(SaleID) returns (SaleResponse);
   rpc GetListSales(SaleFilter) returns (SaleList);
   rpc DeleteSales(SaleID) returns (Message);
+
+  // ------------------ Statistics ---------------------------------
+  rpc GetMostSoldProductsByDay (MostSoldProductsRequest) returns (MostSoldProductsResponse);
+
 }
