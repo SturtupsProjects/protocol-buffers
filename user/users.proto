@@ -25,12 +25,14 @@ message ClientRequest {
   string full_name = 2;
   string address = 3;
   string phone = 4;
+  string type = 5;
 }
 message ClientUpdateRequest {
   string id = 1;
   string full_name = 2;
   string address = 3;
   string phone = 4;
+  string type = 5;
 }
 
 message ClientResponse {
@@ -38,6 +40,7 @@ message ClientResponse {
   string full_name = 2;
   string address = 3;
   string phone = 4;
+  string type = 5;
 }
 
 message FilterClientRequest {
@@ -46,6 +49,7 @@ message FilterClientRequest {
   string phone = 3;
   int32 page = 4;
   int32 limit = 5;
+  string type = 6;
 }
 
 message ClientListResponse {
@@ -102,7 +106,8 @@ message LogInRequest {
 message TokenResponse {
   string access_token = 1;
   string refresh_token = 2;
-  int32 expire_at = 3;
+  string user_id = 3;
+  int32 expire_at = 4;
 }
 message LogInResponse {
   string user_id = 1;

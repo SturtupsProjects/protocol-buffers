@@ -222,6 +222,15 @@ message SaleList {
   repeated SaleResponse sales = 1;
 }
 
+message CompanyID {
+  string id = 1;
+}
+
+message PriceProducts {
+  string company_id = 1;
+  int64 total_price = 2;
+}
+
 // -------------------- Services ---------------------------------
 service Products {
 
@@ -253,4 +262,9 @@ service Products {
   rpc GetSales(SaleID) returns (SaleResponse);
   rpc GetListSales(SaleFilter) returns (SaleList);
   rpc DeleteSales(SaleID) returns (Message);
+
+  // ------------------- statistics --------------------------
+  rpc TotalPriceOfProducts(CompanyID) returns (PriceProducts);
+  rpc TotalSoldProducts(CompanyID) returns (PriceProducts);
+  rpc TotalPurchaseProducts(CompanyID) returns (PriceProducts);
 }
