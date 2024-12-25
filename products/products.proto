@@ -242,6 +242,21 @@ message DailySales {
   string product_name = 2;
   int64 total_quantity = 3;}
 
+message GetTopEntitiesRequest {
+  string company_id = 1;
+  string start_date = 2;
+  string end_date = 3;
+  int32 limit = 4; // Number of top entities to fetch
+}
+
+message TopEntity {
+  string name = 1;
+  double total_value = 2; // Total value of products purchased
+}
+
+message GetTopEntitiesResponse {
+  repeated TopEntity entities = 1;
+}
 message MostSoldProductsResponse {
   repeated DailySales daily_sales = 1;
 }
@@ -283,5 +298,7 @@ service Products {
   rpc TotalSoldProducts(CompanyID) returns (PriceProducts);
   rpc TotalPurchaseProducts(CompanyID) returns (PriceProducts);
   rpc GetMostSoldProductsByDay (MostSoldProductsRequest) returns (MostSoldProductsResponse);
+  rpc GetTopClients(GetTopEntitiesRequest) returns (GetTopEntitiesResponse);
+  rpc GetTopSuppliers(GetTopEntitiesRequest) returns (GetTopEntitiesResponse);
 
 }
