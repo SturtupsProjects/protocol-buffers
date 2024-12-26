@@ -256,7 +256,7 @@ message GetTopEntitiesRequest {
 }
 
 message TopEntity {
-  string name = 1;
+  string supplier_id = 1;
   double total_value = 2; // Total value of products purchased
 }
 
@@ -303,7 +303,9 @@ service Products {
   rpc TotalPriceOfProducts(CompanyID) returns (PriceProducts);
   rpc TotalSoldProducts(CompanyID) returns (PriceProducts);
   rpc TotalPurchaseProducts(CompanyID) returns (PriceProducts);
+
   rpc GetMostSoldProductsByDay (MostSoldProductsRequest) returns (MostSoldProductsResponse);
+
   rpc GetTopClients(GetTopEntitiesRequest) returns (GetTopEntitiesResponse);
   rpc GetTopSuppliers(GetTopEntitiesRequest) returns (GetTopEntitiesResponse);
 
