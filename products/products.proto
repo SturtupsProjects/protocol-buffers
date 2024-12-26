@@ -194,14 +194,15 @@ message SaleRequest {
 message SaleResponse {
   string id = 1;
   string client_id = 2;
-  string sold_by = 3;
-  int64 total_sale_price = 4;
-  string payment_method = 5;
-  string company_id = 6; // Company ID added
-  string created_at = 7;
-  repeated SalesItem sold_products = 8;
-  string client_name = 9;
-  string client_phone_number = 10;
+  string client_name = 3;
+  string client_phone_number = 4;
+  string sold_by = 5;
+  string sold_by_name = 6;
+  int64 total_sale_price = 7;
+  string payment_method = 8;
+  string company_id = 9; // Company ID added
+  string created_at = 10;
+  repeated SalesItem sold_products = 11;
 }
 
 message SaleUpdate {
