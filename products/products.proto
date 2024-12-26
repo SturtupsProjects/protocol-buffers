@@ -133,6 +133,8 @@ message PurchaseResponse {
   string company_id = 7; // Company ID added
   string created_at = 8;
   repeated PurchaseItemResponse items = 9;
+  string supplier_name = 10;
+  string purchaser_phone_number = 11;
 }
 
 message PurchaseItemResponse {
@@ -142,6 +144,7 @@ message PurchaseItemResponse {
   int32 quantity = 4;
   int64 purchase_price = 5;
   int64 total_price = 6;
+  string product_name = 7;
 }
 
 message PurchaseID {
@@ -177,6 +180,7 @@ message SalesItem {
   int32 quantity = 4;
   int64 sale_price = 5;
   int64 total_price = 6;
+  string product_name = 7;
 }
 
 message SaleRequest {
@@ -196,6 +200,8 @@ message SaleResponse {
   string company_id = 6; // Company ID added
   string created_at = 7;
   repeated SalesItem sold_products = 8;
+  string client_name = 9;
+  string client_phone_number = 10;
 }
 
 message SaleUpdate {
