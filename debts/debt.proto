@@ -8,10 +8,6 @@ option go_package = "internal/generated/debts";
 // ----------------------- Service --------------------
 service DebtsService {
 
-  rpc AddClient(CreateClients) returns (Client);
-  rpc GetClient(ClientID) returns (Client);
-  rpc UpdateClient(ClientUpdate) returns (Client);
-  rpc GetAllClients(FilterClient) returns (ClientList);
 
   rpc CreateDebt(DebtRequest) returns (Debt);
   rpc GetDebt(DebtID) returns (Debt);
@@ -19,6 +15,16 @@ service DebtsService {
   rpc GetListDebts(FilterDebt) returns (DebtsList);
   rpc GetClientDebts(ClientID) returns (DebtsList);
 
+
+}
+service ClientService {
+  rpc AddClient(CreateClients) returns (Client);
+  rpc GetClient(ClientID) returns (Client);
+  rpc UpdateClient(ClientUpdate) returns (Client);
+  rpc GetAllClients(FilterClient) returns (ClientList);
+
+}
+service PaymentService {
   rpc GetPayment(PaymentID) returns (Payment);
   rpc GetPaymentsByDebtId(DebtID) returns (PaymentList);
   rpc GetPayments(FilterPayment) returns (PaymentList);
