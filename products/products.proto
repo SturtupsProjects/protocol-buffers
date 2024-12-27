@@ -231,13 +231,20 @@ message SaleList {
   repeated SaleResponse sales = 1;
 }
 
-message CompanyID {
-  string id = 1;
+message StatisticReq {
+  string start_date = 1;
+  string end_date = 2;
+  string company_id = 3;
 }
 
 message PriceProducts {
   string company_id = 1;
-  double total_price = 2; // Changed to double
+  repeated Price sum = 2;
+}
+
+message Price {
+  string many_type = 1;
+  double total_price = 2;
 }
 
 
@@ -305,9 +312,9 @@ service Products {
   rpc DeleteSales(SaleID) returns (Message);
 
   // ------------------- statistics --------------------------
-  rpc TotalPriceOfProducts(CompanyID) returns (PriceProducts);
-  rpc TotalSoldProducts(CompanyID) returns (PriceProducts);
-  rpc TotalPurchaseProducts(CompanyID) returns (PriceProducts);
+  rpc TotalPriceOfProducts(StatisticReq) returns (PriceProducts);
+  rpc TotalSoldProducts(StatisticReq) returns (PriceProducts);
+  rpc TotalPurchaseProducts(StatisticReq) returns (PriceProducts);
 
   rpc GetMostSoldProductsByDay (MostSoldProductsRequest) returns (MostSoldProductsResponse);
 
