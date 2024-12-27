@@ -26,6 +26,7 @@ message ClientRequest {
   string address = 3;
   string phone = 4;
   string type = 5;
+  string company_id = 6;
 }
 message ClientUpdateRequest {
   string id = 1;
@@ -33,6 +34,7 @@ message ClientUpdateRequest {
   string address = 3;
   string phone = 4;
   string type = 5;
+  string company_id = 6;
 }
 
 message ClientResponse {
@@ -41,6 +43,7 @@ message ClientResponse {
   string address = 3;
   string phone = 4;
   string type = 5;
+  string company_id = 6;
 }
 
 message FilterClientRequest {
@@ -50,6 +53,7 @@ message FilterClientRequest {
   int32 page = 4;
   int32 limit = 5;
   string type = 6;
+  string company_id = 7;
 }
 
 message ClientListResponse {
@@ -86,6 +90,7 @@ message UserResponse {
 
 message UserIDRequest {
   string id = 1;
+  string company_id = 2;
 }
 
 message FilterUserRequest {
