@@ -275,9 +275,34 @@ message TopEntity {
 message GetTopEntitiesResponse {
   repeated TopEntity entities = 1;
 }
+
 message MostSoldProductsResponse {
   repeated DailySales daily_sales = 1;
 }
+
+message CashFlowRequest {
+  string user_id = 1;
+  double amount = 2;
+  string description = 3;
+  string payment_method = 4;
+  string company_id = 5;
+}
+
+message CashFlow {
+  string id = 1;
+  string user_id = 2;
+  string transaction_date = 3;
+  double amount = 4;
+  string transaction_type = 5;
+  string description = 6;
+  string payment_method = 7;
+  string company_id = 8;
+}
+
+message ListCashFlow {
+  repeated CashFlow cash = 1;
+}
+
 // -------------------- Services ---------------------------------
 service Products {
 
@@ -310,6 +335,10 @@ service Products {
   rpc GetSales(SaleID) returns (SaleResponse);
   rpc GetListSales(SaleFilter) returns (SaleList);
   rpc DeleteSales(SaleID) returns (Message);
+
+  // -------------------- Cash Flow ----------------------------
+  rpc GetCashFlow(StatisticReq) returns (CashFlow);
+  rpc CreateCashFlow(CashFlowRequest) returns (ListCashFlow);
 
   // ------------------- statistics --------------------------
   rpc TotalPriceOfProducts(StatisticReq) returns (PriceProducts);
