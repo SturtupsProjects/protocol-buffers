@@ -337,9 +337,9 @@ service Products {
   rpc DeleteSales(SaleID) returns (Message);
 
   // -------------------- Cash Flow ----------------------------
-  rpc GetCashFlow(StatisticReq) returns (CashFlow);
-  rpc CreateIncome(CashFlowRequest) returns (ListCashFlow);
-  rpc CreateExpense(CashFlowRequest) returns (ListCashFlow);
+  rpc GetCashFlow(StatisticReq) returns (ListCashFlow);
+  rpc CreateIncome(CashFlowRequest) returns (CashFlow);
+  rpc CreateExpense(CashFlowRequest) returns (CashFlow);
 
   // ------------------- statistics --------------------------
   rpc TotalPriceOfProducts(StatisticReq) returns (PriceProducts);
