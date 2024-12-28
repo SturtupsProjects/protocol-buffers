@@ -9,10 +9,10 @@ option go_package = "internal/generated/debts";
 service DebtsService {
 
 
-  rpc CreateDebt(DebtRequest) returns (Debt);
-  rpc GetDebt(DebtID) returns (Debt);
-  rpc PayDebt(PayDebtReq) returns (Debt);
-  rpc GetListDebts(FilterDebt) returns (DebtsList);
+  rpc CreateDebts(DebtsRequest) returns (Debts);
+  rpc GetDebts(DebtsID) returns (Debts);
+  rpc PayDebts(PayDebtsReq) returns (Debts);
+  rpc GetListDebts(FilterDebts) returns (DebtsList);
   rpc GetClientDebts(ClientID) returns (DebtsList);
 
 
@@ -26,7 +26,7 @@ service ClientService {
 }
 service PaymentService {
   rpc GetPayment(PaymentID) returns (Payment);
-  rpc GetPaymentsByDebtId(DebtID) returns (PaymentList);
+  rpc GetPaymentsByDebtsId(DebtsID) returns (PaymentList);
   rpc GetPayments(FilterPayment) returns (PaymentList);
 }
 
@@ -40,12 +40,13 @@ message Payment {
   string id = 1;
   string installment_id = 2;
   string payment_date = 3;
-  int64 payment_amount = 4;
+  double payment_amount = 4;
   string created_at = 5;
 }
 
 message PaymentID {
   string id = 1;
+  string company_id = 2;
 }
 
 message FilterPayment {
@@ -54,44 +55,50 @@ message FilterPayment {
   string end_date = 3;
 }
 
-// Debt Messages
+// Debts Messages
 message DebtsList {
-  repeated Debt debts = 1;
+  repeated Debts installments = 1;
 }
 
-message FilterDebt {
-  int32 months_duration = 1;
-  string created_after = 2;
-  string created_before = 3;
-  int64 total_amount_min = 4;
-  int64 total_amount_max = 5;
+message FilterDebts {
+  double total_amount_min = 1;
+  double total_amount_max = 2;
+  string created_after = 3;
+  string created_before = 4;
+  string currency_code = 5;
+  string company_id = 6;
 }
 
-message PayDebtReq {
+message PayDebtsReq {
   string debt_id = 1;
-  int64 paid_amount = 2;
+  double paid_amount = 2;
+  string company_id = 3;
 }
 
-message DebtID {
+message DebtsID {
   string id = 1;
+  string company_id = 2;
 }
 
-message Debt {
+message Debts {
   string id = 1;
-  int32 months_duration = 2;
-  int32 present_month = 3;
-  int64 total_amount = 4;
-  int64 amount_paid = 5;
-  string last_payment_date = 6;
-  bool is_fully_paid = 7;
-  string created_at = 8;
-}
-
-message DebtRequest {
-  int32 months_duration = 1;
   string client_id = 2;
-  int64 total_amount = 3;
+  double total_amount = 3;
+  double amount_paid = 4;
+  string last_payment_date = 5;
+  bool is_fully_paid = 6;
+  string created_at = 7;
+  string currency_code = 8;
+  string company_id = 9;
 }
+
+message DebtsRequest {
+  string client_id = 1;
+  double total_amount = 2;
+  string currency_code = 3;
+  string company_id = 4;
+}
+
 
 // Client Messages
 message ClientList {
