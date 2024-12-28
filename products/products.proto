@@ -338,7 +338,8 @@ service Products {
 
   // -------------------- Cash Flow ----------------------------
   rpc GetCashFlow(StatisticReq) returns (CashFlow);
-  rpc CreateCashFlow(CashFlowRequest) returns (ListCashFlow);
+  rpc CreateIncome(CashFlowRequest) returns (ListCashFlow);
+  rpc CreateExpense(CashFlowRequest) returns (ListCashFlow);
 
   // ------------------- statistics --------------------------
   rpc TotalPriceOfProducts(StatisticReq) returns (PriceProducts);
