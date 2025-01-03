@@ -80,11 +80,21 @@ message CreateProductRequest {
   string total_count = 9;
 }
 
+message CreateProductRequestBulk {
+  string name = 1;
+  string bill_format = 2;
+  string image_url = 3;
+  double incoming_price = 4; // Changed to double
+  double standard_price = 5; // Changed to double
+  string total_count = 6;
+}
+
 // CreateBulkProductsRequest for bulk creation
 message CreateBulkProductsRequest {
   string category_id = 1;
   string company_id = 2;
-  repeated CreateProductRequest products = 3;
+  string created_by = 3;
+  repeated CreateProductRequestBulk products = 4;
 }
 
 // BulkCreateResponse
