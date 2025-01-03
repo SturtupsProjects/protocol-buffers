@@ -126,6 +126,8 @@ message ProductFilter {
   string company_id = 3; // Company ID added
   string created_by = 4;
   string created_at = 5;
+  int64 limit = 6;
+  int64 page = 7;
 }
 
 message ProductList {
