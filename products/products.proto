@@ -86,7 +86,7 @@ message CreateProductRequestBulk {
   string image_url = 3;
   double incoming_price = 4; // Changed to double
   double standard_price = 5; // Changed to double
-  string total_count = 6;
+  int64 total_count = 6;
 }
 
 // CreateBulkProductsRequest for bulk creation
