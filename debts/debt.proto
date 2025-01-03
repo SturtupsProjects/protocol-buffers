@@ -144,3 +144,6 @@ message CreateClients {
   string telegram_username = 5;
   string notes = 6;
 }
+message Error {
+  string message = 1;
+}
