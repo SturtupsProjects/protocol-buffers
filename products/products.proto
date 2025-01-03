@@ -80,6 +80,20 @@ message CreateProductRequest {
   string total_count = 9;
 }
 
+// CreateBulkProductsRequest for bulk creation
+message CreateBulkProductsRequest {
+  string category_id = 1;
+  string company_id = 2;
+  repeated CreateProductRequest products = 3;
+}
+
+// BulkCreateResponse
+message BulkCreateResponse {
+  bool success = 1;
+  repeated Product products = 2;
+  string message = 3;
+}
+
 message UpdateProductRequest {
   string id = 1;
   string category_id = 2;
@@ -316,6 +330,7 @@ service Products {
 
   // ------------- Products -----------------------------------
   rpc CreateProduct(CreateProductRequest) returns (Product);
+  rpc CreateBulkProducts(CreateBulkProductsRequest) returns (BulkCreateResponse);
   rpc UpdateProduct(UpdateProductRequest) returns (Product);
   rpc DeleteProduct(GetProductRequest) returns (Message);
   rpc GetProduct(GetProductRequest) returns (Product);
