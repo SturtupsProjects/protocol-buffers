@@ -78,13 +78,15 @@ message DebtsID {
 message Debts {
   string id = 1;
   string client_id = 2;
-  double total_amount = 3;
-  double amount_paid = 4;
-  string last_payment_date = 5;
-  bool is_fully_paid = 6;
-  string created_at = 7;
-  string currency_code = 8;
-  string company_id = 9;
+  string client_name = 3;
+  string client_phone = 4;
+  double total_amount = 5;
+  double amount_paid = 6;
+  string last_payment_date = 7;
+  bool is_fully_paid = 8;
+  string created_at = 9;
+  string currency_code = 10;
+  string company_id = 11;
 }
 
 message DebtsRequest {
