@@ -77,6 +77,31 @@ message CreateProductRequest {
   double standard_price = 6; // Changed to double
   string company_id = 7; // Company ID added
   string created_by = 8;
+  string total_count = 9;
+}
+
+message CreateProductRequestBulk {
+  string name = 1;
+  string bill_format = 2;
+  string image_url = 3;
+  double incoming_price = 4; // Changed to double
+  double standard_price = 5; // Changed to double
+  int64 total_count = 6;
+}
+
+// CreateBulkProductsRequest for bulk creation
+message CreateBulkProductsRequest {
+  string category_id = 1;
+  string company_id = 2;
+  string created_by = 3;
+  repeated CreateProductRequestBulk products = 4;
+}
+
+// BulkCreateResponse
+message BulkCreateResponse {
+  bool success = 1;
+  repeated Product products = 2;
+  string message = 3;
 }
 
 message UpdateProductRequest {
@@ -101,6 +126,8 @@ message ProductFilter {
   string company_id = 3; // Company ID added
   string created_by = 4;
   string created_at = 5;
+  int64 limit = 6;
+  int64 page = 7;
 }
 
 message ProductList {
@@ -315,6 +342,7 @@ service Products {
 
   // ------------- Products -----------------------------------
   rpc CreateProduct(CreateProductRequest) returns (Product);
+  rpc CreateBulkProducts(CreateBulkProductsRequest) returns (BulkCreateResponse);
   rpc UpdateProduct(UpdateProductRequest) returns (Product);
   rpc DeleteProduct(GetProductRequest) returns (Message);
   rpc GetProduct(GetProductRequest) returns (Product);
