@@ -40,17 +40,20 @@ message CreateBranchRequest {
 
 message GetBranchRequest {
   string branch_id = 1;
+  string company_id = 2;
 }
 
 message UpdateBranchRequest {
   string branch_id = 1;
-  string name = 2;
-  string address = 3;
-  string phone_number = 4;
+  string company_id = 2;
+  string name = 3;
+  string address = 4;
+  string phone_number = 5;
 }
 
 message DeleteBranchRequest {
   string branch_id = 1;
+  string company_id = 2;
 }
 
 message ListBranchesRequest {
