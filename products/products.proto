@@ -22,6 +22,7 @@ message Category {
   string image_url = 4;
   string created_by = 5;
   string created_at = 6;
+  string branch_id = 7; // Added branch_id
 }
 
 message UpdateCategoryRequest {
@@ -30,18 +31,21 @@ message UpdateCategoryRequest {
   string company_id = 3; // Company ID added
   string image_url = 4;
   string created_by = 5;
+  string branch_id = 6; // Added branch_id
 }
 
 message CreateCategoryRequest {
   string name = 1;
-  string company_id = 2; // Company ID added
+  string company_id = 2;
   string image_url = 3;
   string created_by = 4;
+  string branch_id = 5; // Added branch_id
 }
 
 message GetCategoryRequest {
   string id = 1;
   string company_id = 2; // Company ID added
+  string branch_id = 3; // Added branch_id
 }
 
 message CategoryList {
@@ -51,6 +55,7 @@ message CategoryList {
 message CategoryName {
   string name = 1;
   string company_id = 2; // Company ID added
+  string branch_id = 3; // Added branch_id
 }
 
 // -------------------- Products ---------------------------------
@@ -66,6 +71,7 @@ message Product {
   string image_url = 9;
   string created_by = 10;
   string created_at = 11;
+  string branch_id = 12; // Added branch_id
 }
 
 message CreateProductRequest {
@@ -78,6 +84,7 @@ message CreateProductRequest {
   string company_id = 7; // Company ID added
   string created_by = 8;
   string total_count = 9;
+  string branch_id = 10; // Added branch_id
 }
 
 message CreateProductRequestBulk {
@@ -87,6 +94,7 @@ message CreateProductRequestBulk {
   double incoming_price = 4; // Changed to double
   double standard_price = 5; // Changed to double
   int64 total_count = 6;
+  string branch_id = 7; // Added branch_id
 }
 
 // CreateBulkProductsRequest for bulk creation
@@ -94,7 +102,8 @@ message CreateBulkProductsRequest {
   string category_id = 1;
   string company_id = 2;
   string created_by = 3;
-  repeated CreateProductRequestBulk products = 4;
+  string branch_id = 4; // Added branch_id
+  repeated CreateProductRequestBulk products = 5;
 }
 
 // BulkCreateResponse
@@ -113,11 +122,13 @@ message UpdateProductRequest {
   double incoming_price = 6; // Changed to double
   double standard_price = 7; // Changed to double
   string company_id = 8; // Company ID added
+  string branch_id = 9; // Added branch_id
 }
 
 message GetProductRequest {
   string id = 1;
   string company_id = 2; // Company ID added
+  string branch_id = 3; // Added branch_id
 }
 
 message ProductFilter {
@@ -128,6 +139,7 @@ message ProductFilter {
   string created_at = 5;
   int64 limit = 6;
   int64 page = 7;
+  string branch_id = 8; // Added branch_id
 }
 
 message ProductList {
@@ -147,7 +159,8 @@ message PurchaseRequest {
   string description = 3;
   string payment_method = 4;
   string company_id = 5; // Company ID added
-  repeated PurchaseItem items = 6;
+  string branch_id = 6; // Added branch_id
+  repeated PurchaseItem items = 7;
 }
 
 message PurchaseResponse {
@@ -158,10 +171,11 @@ message PurchaseResponse {
   string description = 5;
   string payment_method = 6;
   string company_id = 7; // Company ID added
-  string created_at = 8;
-  repeated PurchaseItemResponse items = 9;
-  string supplier_name = 10;
-  string purchaser_phone_number = 11;
+  string branch_id = 8; // Added branch_id
+  string created_at = 9;
+  repeated PurchaseItemResponse items = 10;
+  string supplier_name = 11;
+  string purchaser_phone_number = 12;
 }
 
 message PurchaseItemResponse {
@@ -178,6 +192,7 @@ message PurchaseItemResponse {
 message PurchaseID {
   string id = 1;
   string company_id = 2; // Company ID added
+  string branch_id = 3; // Added branch_id
 }
 
 message FilterPurchase {
@@ -186,6 +201,7 @@ message FilterPurchase {
   string purchased_by = 3;
   string company_id = 4; // Company ID added
   string created_at = 5;
+  string branch_id = 6; // Added branch_id
 }
 
 message PurchaseList {
@@ -198,6 +214,7 @@ message PurchaseUpdate {
   string description = 3;
   string payment_method = 4;
   string company_id = 5; // Company ID added
+  string branch_id = 6; // Added branch_id
 }
 
 // -------------------- Sales ------------------------------------
@@ -217,9 +234,8 @@ message SaleRequest {
   string sold_by = 2;
   string payment_method = 3;
   string company_id = 4; // Company ID added
-  repeated SalesItem sold_products = 5;
-  string client_name = 6;
-  string client_phone = 7;
+  string branch_id = 5; // Added branch_id
+  repeated SalesItem sold_products = 6;
 }
 
 message SaleResponse {
@@ -232,8 +248,9 @@ message SaleResponse {
   double total_sale_price = 7; // Changed to double
   string payment_method = 8;
   string company_id = 9; // Company ID added
-  string created_at = 10;
-  repeated SalesItem sold_products = 11;
+  string branch_id = 10; // Added branch_id
+  string created_at = 11;
+  repeated SalesItem sold_products = 12;
 }
 
 message SaleUpdate {
@@ -241,11 +258,13 @@ message SaleUpdate {
   string client_id = 2;
   string payment_method = 3;
   string company_id = 4; // Company ID added
+  string branch_id = 5; // Added branch_id
 }
 
 message SaleID {
   string id = 1;
   string company_id = 2; // Company ID added
+  string branch_id = 3; // Added branch_id
 }
 
 message SaleFilter {
@@ -254,6 +273,7 @@ message SaleFilter {
   string client_id = 3;
   string sold_by = 4;
   string company_id = 5; // Company ID added
+  string branch_id = 6; // Added branch_id
 }
 
 message SaleList {
@@ -264,11 +284,13 @@ message StatisticReq {
   string start_date = 1;
   string end_date = 2;
   string company_id = 3;
+  string branch_id = 4; // Added branch_id
 }
 
 message PriceProducts {
   string company_id = 1;
-  repeated Price sum = 2;
+  string branch_id = 2; // Added branch_id
+  repeated Price sum = 3;
 }
 
 message Price {
@@ -281,19 +303,21 @@ message MostSoldProductsRequest {
   string company_id = 1;
   string start_date = 2; // ISO 8601 format: YYYY-MM-DD
   string end_date = 3;   // ISO 8601 format: YYYY-MM-DD
+  string branch_id = 4;  // Added branch_id
 }
-
 
 message DailySales {
   string day = 1;
   string product_name = 2;
-  int64 total_quantity = 3;}
+  int64 total_quantity = 3;
+}
 
 message GetTopEntitiesRequest {
   string company_id = 1;
   string start_date = 2;
   string end_date = 3;
   int32 limit = 4; // Number of top entities to fetch
+  string branch_id = 5; // Added branch_id
 }
 
 message TopEntity {
@@ -315,6 +339,7 @@ message CashFlowRequest {
   string description = 3;
   string payment_method = 4;
   string company_id = 5;
+  string branch_id = 6; // Added branch_id
 }
 
 message CashFlow {
@@ -326,6 +351,7 @@ message CashFlow {
   string description = 6;
   string payment_method = 7;
   string company_id = 8;
+  string branch_id = 9; // Added branch_id
 }
 
 message ListCashFlow {
