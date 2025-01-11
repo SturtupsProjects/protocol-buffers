@@ -218,6 +218,8 @@ message SaleRequest {
   string payment_method = 3;
   string company_id = 4; // Company ID added
   repeated SalesItem sold_products = 5;
+  string client_name = 6;
+  string client_phone = 7;
 }
 
 message SaleResponse {
