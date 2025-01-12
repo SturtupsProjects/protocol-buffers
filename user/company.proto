@@ -12,6 +12,58 @@ service CompanyService {
   rpc ListCompanies (ListCompaniesRequest) returns (ListCompaniesResponse);
   rpc ListCompanyUsers (ListCompanyUsersRequest) returns (ListCompanyUsersResponse);
   rpc CreateUserToCompany (CreateUserToCompanyRequest) returns (Id);
+
+  // Branch CRUD Operations
+  rpc CreateBranch (CreateBranchRequest) returns (BranchResponse);
+  rpc GetBranch (GetBranchRequest) returns (BranchResponse);
+  rpc UpdateBranch (UpdateBranchRequest) returns (BranchResponse);
+  rpc DeleteBranch (DeleteBranchRequest) returns (Message);
+  rpc ListBranches (ListBranchesRequest) returns (ListBranchesResponse);
+}
+
+message BranchResponse {
+  string branch_id = 1;
+  string name = 2;
+  string address = 3;
+  string phone_number = 4;
+  string company_id = 5;
+  string created_at = 6;
+  string updated_at = 7;
+}
+
+message CreateBranchRequest {
+  string name = 1;
+  string address = 2;
+  string phone_number = 3;
+  string company_id = 4;
+}
+
+message GetBranchRequest {
+  string branch_id = 1;
+  string company_id = 2;
+}
+
+message UpdateBranchRequest {
+  string branch_id = 1;
+  string company_id = 2;
+  string name = 3;
+  string address = 4;
+  string phone_number = 5;
+}
+
+message DeleteBranchRequest {
+  string branch_id = 1;
+  string company_id = 2;
+}
+
+message ListBranchesRequest {
+  string company_id = 1;
+  int32 limit = 2;
+  int32 page = 3;
+}
+
+message ListBranchesResponse {
+  repeated BranchResponse branches = 1;
 }
 
 message Id {
