@@ -202,6 +202,8 @@ message FilterPurchase {
   string company_id = 4; // Company ID added
   string created_at = 5;
   string branch_id = 6; // Added branch_id
+  int64 limit = 7;
+  int64 page = 8;
 }
 
 message PurchaseList {
