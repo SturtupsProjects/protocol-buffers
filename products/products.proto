@@ -252,6 +252,8 @@ message SaleFilter {
   string client_id = 3;
   string sold_by = 4;
   string company_id = 5; // Company ID added
+  int64 limit = 6;
+  int64 page = 7;
 }
 
 message SaleList {
