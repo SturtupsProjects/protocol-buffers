@@ -146,6 +146,7 @@ message ProductFilter {
 
 message ProductList {
   repeated Product products = 1;
+  int64 total_count = 2;
 }
 
 // -------------------- Purchases --------------------------------
@@ -210,6 +211,7 @@ message FilterPurchase {
 
 message PurchaseList {
   repeated PurchaseResponse purchases = 1;
+  int64 total_count = 2;
 }
 
 message PurchaseUpdate {
@@ -284,6 +286,7 @@ message SaleFilter {
 
 message SaleList {
   repeated SaleResponse sales = 1;
+  int64 total_count = 2;
 }
 
 message StatisticReq {
