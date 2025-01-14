@@ -235,6 +235,8 @@ message SaleRequest {
   string payment_method = 3;
   string company_id = 4; // Company ID added
   string branch_id = 5; // Added branch_id
+  string client_name = 7;
+  string client_phone = 8;
   repeated SalesItem sold_products = 6;
 }
 
