@@ -50,6 +50,7 @@ message GetCategoryRequest {
 
 message CategoryList {
   repeated Category categories = 1;
+  int64 total_count = 2;
 }
 
 message CategoryName {
