@@ -64,6 +64,7 @@ message ListBranchesRequest {
 
 message ListBranchesResponse {
   repeated BranchResponse branches = 1;
+  int64 total_count = 2;
 }
 
 message Id {
