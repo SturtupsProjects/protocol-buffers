@@ -53,6 +53,7 @@ message FilterPayment {
 // Debts Messages
 message DebtsList {
   repeated Debts installments = 1;
+  int64 total_count = 2;
 }
 
 message FilterDebts {
