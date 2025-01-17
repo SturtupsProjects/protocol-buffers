@@ -62,8 +62,9 @@ message FilterDebts {
   string created_before = 4;
   string currency_code = 5;
   string company_id = 6;
-  int32 page = 7;
-  int32 limit = 8;
+  string description = 7;
+  int32 page = 8;
+  int32 limit = 9;
 }
 
 message PayDebtsReq {
