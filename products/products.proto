@@ -208,6 +208,7 @@ message FilterPurchase {
   string branch_id = 6; // Added branch_id
   int64 limit = 7;
   int64 page = 8;
+  string description = 9;
 }
 
 message PurchaseList {
