@@ -143,6 +143,7 @@ message ProductFilter {
   int64 limit = 6;
   int64 page = 7;
   string branch_id = 8; // Added branch_id
+  int64 total_count = 9;
 }
 
 message ProductList {
