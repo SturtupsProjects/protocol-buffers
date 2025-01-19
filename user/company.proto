@@ -86,6 +86,7 @@ message ListCompanyUsersRequest {
   string company_id = 1;
   int32 limit = 2;
   int32 page = 3;
+  string name = 4;
 }
 
 message ListCompanyUsersResponse {
