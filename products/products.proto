@@ -201,7 +201,7 @@ message PurchaseID {
 }
 
 message FilterPurchase {
-  string product_id = 1;
+  string product_name = 1;
   string supplier_id = 2;
   string purchased_by = 3;
   string company_id = 4; // Company ID added
@@ -289,6 +289,7 @@ message SaleFilter {
   int64 limit = 6;
   int64 page = 7;
   string branch_id = 8; // Added branch_id
+  string product_name = 9;
 }
 
 message SaleList {
