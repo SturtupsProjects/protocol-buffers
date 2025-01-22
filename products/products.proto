@@ -412,6 +412,7 @@ message Transfer {
 
 message TransferID {
   string id = 1;
+  string company_id = 2;
 }
 
 message TransferFilter {
@@ -419,6 +420,7 @@ message TransferFilter {
   int64 page = 2;
   string branch_id = 3;
   string product_name = 4;
+  string company_id = 5;
 }
 
 message TransferList {
