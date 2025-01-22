@@ -377,6 +377,55 @@ message ListCashFlow {
   repeated CashFlow cash = 1;
 }
 
+message TransfersProductsReq {
+  string product_id = 1;
+  int64 product_quantity = 2;
+}
+
+message TransferReq {
+  string transferred_by = 1;
+  string from_branch_id = 2;
+  string to_branch_id = 3;
+  string description = 4;
+  repeated TransfersProductsReq products = 5;
+  string company_id = 6;
+}
+
+message TransfersProducts {
+  string id = 1;
+  string product_id = 2;
+  int64 product_quantity = 3;
+  string product_name = 4;
+  string product_image = 5;
+}
+
+message Transfer {
+  string id = 1;
+  string transferred_by = 2;
+  string from_branch_id = 3;
+  string to_branch_id = 4;
+  string description = 5;
+  repeated TransfersProducts products = 6;
+  string created_at = 7;
+  string company_id = 8;
+}
+
+message TransferID {
+  string id = 1;
+}
+
+message TransferFilter {
+  int64 limit = 1;
+  int64 page = 2;
+  string branch_id = 3;
+  string product_name = 4;
+}
+
+message TransferList {
+  repeated Transfer transfers = 1;
+  int64 total_count = 2;
+}
+
 // -------------------- Services ---------------------------------
 service Products {
 
@@ -420,6 +469,11 @@ service Products {
   rpc GetTotalExpense(StatisticReq) returns (PriceProducts);
   rpc GetNetProfit(StatisticReq) returns (PriceProducts);
 
+  //------------------- Product Transfers --------------------
+
+  rpc CreateTransfers(TransferReq) returns (Transfer);
+  rpc GetTransfers(TransferID) returns (Transfer);
+  rpc GetTransferList(TransferFilter) returns (TransferList);
 
   // ------------------- statistics --------------------------
   rpc TotalPriceOfProducts(StatisticReq) returns (PriceProducts);
