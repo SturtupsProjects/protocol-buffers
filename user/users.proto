@@ -60,6 +60,7 @@ message FilterClientRequest {
 
 message ClientListResponse {
   repeated ClientResponse clients = 1;
+  int64 total_count = 2;
 }
 
 // Messages
