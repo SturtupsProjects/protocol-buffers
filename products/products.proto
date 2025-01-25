@@ -430,6 +430,43 @@ message TransferList {
   int64 total_count = 2;
 }
 
+message SaleStatisticsReq {
+  string period = 1;
+  string start_date = 2;
+  string end_date = 3;
+  string company_id = 4;
+  string branch_id = 5;
+}
+
+message SaleStatisticsDate {
+  string date = 1;
+  repeated Price values = 2;
+}
+
+message SaleStatistics {
+  string time_period = 1;
+  repeated SaleStatisticsDate data = 2;
+  double total = 3;
+  string branch_id = 4;
+  string company_id = 5;
+}
+
+message BranchIncomeReq {
+  string start_date = 1;
+  string end_date = 2;
+  string company_id = 3;
+}
+
+message BranchIncomeData {
+  string branch_id = 1; // ID филиала
+  repeated Price values = 2; // Список доходов по методам оплаты
+}
+
+message BranchIncomeRes {
+  repeated BranchIncomeData data = 1; // Доходы по филиалам
+  double total = 2; // Общий доход по всем филиалам
+}
+
 // -------------------- Services ---------------------------------
 service Products {
 
@@ -489,4 +526,7 @@ service Products {
   rpc GetTopClients(GetTopEntitiesRequest) returns (GetTopEntitiesResponse);
   rpc GetTopSuppliers(GetTopEntitiesRequest) returns (GetTopEntitiesResponse);
 
+  // ------------------------ Graph Statistics -----------------
+  rpc GetSaleStatistics(SaleStatisticsReq) returns (SaleStatistics);
+  rpc GetBranchIncome(BranchIncomeReq) returns (BranchIncomeRes);
 }
