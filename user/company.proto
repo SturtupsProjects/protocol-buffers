@@ -158,8 +158,9 @@ message CompanyBalanceResponse {
   string balance = 2;
 }
 message FilterCompanyBalanceRequest {
-  string user_id = 1;
-  string company_id = 2;
+
+  int32 page = 1;
+  int32 limit = 2;
 }
 message CompanyBalanceListResponse {
   repeated CompanyBalanceResponse users = 1;
