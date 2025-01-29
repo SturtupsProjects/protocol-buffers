@@ -19,6 +19,12 @@ service CompanyService {
   rpc UpdateBranch (UpdateBranchRequest) returns (BranchResponse);
   rpc DeleteBranch (DeleteBranchRequest) returns (Message);
   rpc ListBranches (ListBranchesRequest) returns (ListBranchesResponse);
+
+  rpc CreateCompanyBalance (CompanyBalanceRequest) returns (CompanyBalanceResponse);
+  rpc GetCompanyBalance (Id) returns (CompanyBalanceResponse);
+  rpc UpdateCompanyBalance (CompanyBalanceRequest) returns (CompanyBalanceResponse);
+  rpc GetUsersBalanceList (FilterCompanyBalanceRequest) returns (CompanyBalanceListResponse);
+  rpc DeleteCompanyBalance (Id) returns (Message);
 }
 
 message BranchResponse {
@@ -141,4 +147,20 @@ message ListCompaniesResponse {
 
 message Message {
   string message = 1;
+}
+
+message CompanyBalanceRequest {
+  string company_id = 1;
+  string balance = 2;
+}
+message CompanyBalanceResponse {
+  string company_id = 1;
+  string balance = 2;
+}
+message FilterCompanyBalanceRequest {
+  string user_id = 1;
+  string company_id = 2;
+}
+message CompanyBalanceListResponse {
+  repeated CompanyBalanceResponse users = 1;
 }
