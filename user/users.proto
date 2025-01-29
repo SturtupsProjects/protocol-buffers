@@ -20,6 +20,12 @@ service AuthService {
   rpc GetListClient (FilterClientRequest) returns (ClientListResponse);
   rpc UpdateClient (ClientUpdateRequest) returns (ClientResponse);
   rpc DeleteClient (UserIDRequest) returns (MessageResponse);
+
+  rpc CreateUserBalance (UserBalanceRequest) returns (UserBalanceResponse);
+  rpc GetUserBalance (UserIDRequest) returns (UserBalanceResponse);
+  rpc UpdateUserBalance (UserBalanceRequest) returns (UserBalanceResponse);
+  rpc GetUsersBalanceList (FilterUserBalanceRequest) returns (UserBalanceListResponse);
+  rpc DeleteUserBalance (UserIDRequest) returns (MessageResponse);
 }
 message ClientRequest {
   string full_name = 1;
