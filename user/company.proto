@@ -151,11 +151,11 @@ message Message {
 
 message CompanyBalanceRequest {
   string company_id = 1;
-  string balance = 2;
+  int64 balance = 2;
 }
 message CompanyBalanceResponse {
   string company_id = 1;
-  string balance = 2;
+  int64 balance = 2;
 }
 message FilterCompanyBalanceRequest {
 
