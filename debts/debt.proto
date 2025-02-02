@@ -74,15 +74,14 @@ message DebtsList {
 }
 
 message FilterDebts {
-  double total_amount_min = 1;
-  double total_amount_max = 2;
-  string created_after = 3;
-  string created_before = 4;
-  string currency_code = 5;
-  string company_id = 6;
-  string description = 7;
-  int32 page = 8;
-  int32 limit = 9;
+  bool is_fully_pay = 1;
+  double total_amount_min = 2;
+  double total_amount_max = 3;
+  string currency_code = 4;
+  string company_id = 5;
+  string description = 6;
+  int32 page = 7;
+  int32 limit = 8;
 }
 
 message PayDebtsReq {
