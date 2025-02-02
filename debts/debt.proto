@@ -19,12 +19,29 @@ service DebtsService {
   rpc GetListDebts(FilterDebts) returns (DebtsList);
   rpc GetClientDebts(ClientID) returns (DebtsList);
 
+  rpc GetTotalDebtSum(CompanyID) returns (SumMoney);
+  rpc GetUserTotalDebtSum(ClientID) returns (SumMoney);
+
   rpc GetPayment(PaymentID) returns (Payment);
   rpc GetPaymentsByDebtsId(DebtsID) returns (PaymentList);
   rpc GetPayments(FilterPayment) returns (PaymentList);
 }
 
 // ----------------------- Messages -------------------
+
+message CompanyID {
+  string id = 1;
+}
+
+message SumMoney {
+  string company_id = 1;
+  repeated Money sum = 2;
+}
+
+message Money {
+  string currency = 1;
+  double sum = 2;
+}
 
 message PaymentList {
   repeated Payment payments = 1;
@@ -128,7 +145,8 @@ message ClientUpdate {
 }
 
 message ClientID {
-  string id = 1;
+  string company_id = 1;
+  string id = 2;
 }
 
 message Client {
