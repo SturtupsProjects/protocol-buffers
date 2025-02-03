@@ -25,6 +25,8 @@ service CompanyService {
   rpc UpdateCompanyBalance (CompanyBalanceRequest) returns (CompanyBalanceResponse);
   rpc GetUsersBalanceList (FilterCompanyBalanceRequest) returns (CompanyBalanceListResponse);
   rpc DeleteCompanyBalance (Id) returns (Message);
+
+  rpc SendSMS(SmsRequest) returns (Message);
 }
 
 message BranchResponse {
@@ -164,4 +166,9 @@ message FilterCompanyBalanceRequest {
 }
 message CompanyBalanceListResponse {
   repeated CompanyBalanceResponse users = 1;
+}
+message SmsRequest{
+  string phone = 1;
+  string message = 2;
+  string company_id = 3;
 }
