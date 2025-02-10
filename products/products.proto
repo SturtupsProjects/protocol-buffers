@@ -124,8 +124,9 @@ message UpdateProductRequest {
   string bill_format = 5;
   double incoming_price = 6; // Changed to double
   double standard_price = 7; // Changed to double
-  string company_id = 8; // Company ID added
-  string branch_id = 9; // Added branch_id
+  int64 quantity = 8;
+  string company_id = 9; // Company ID added
+  string branch_id = 10; // Added branch_id
 }
 
 message GetProductRequest {
