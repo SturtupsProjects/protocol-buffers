@@ -25,9 +25,21 @@ service DebtsService {
   rpc GetPayment(PaymentID) returns (Payment);
   rpc GetPaymentsByDebtsId(DebtsID) returns (PaymentList);
   rpc GetPayments(FilterPayment) returns (PaymentList);
+  rpc GetUserPayments(ClientID) returns (UserPaymentsRes);
 }
 
 // ----------------------- Messages -------------------
+
+message UserPaymentsRes {
+  repeated Payments payments = 1;
+}
+
+message Payments {
+  string debt_id = 1;
+  string payment_id = 2;
+  string payment_date = 3;
+  double payment_amount = 5;
+}
 
 message CompanyID {
   string id = 1;
