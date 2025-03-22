@@ -21,7 +21,126 @@ service AuthService {
   rpc UpdateClient (ClientUpdateRequest) returns (ClientResponse);
   rpc DeleteClient (UserIDRequest) returns (MessageResponse);
 
+  // ------------------------------ User Salaries ---------------------------------
+
+  //  Methods for salary
+  rpc CreateSalary(SalaryRequest) returns (SalaryResponse);
+  rpc UpdateSalary(SalaryUpdate) returns (SalaryResponse);
+  rpc GetSalaryByID(ID) returns (SalaryResponse);
+  rpc ListSalaries(GetSalaryRequest) returns (GetSalaryList);
+
+  // Methods for Bonuses
+  rpc CreateAdjustment(AdjustmentRequest) returns (AdjustmentResponse);
+  rpc UpdateAdjustment(AdjustmentRequest) returns (AdjustmentResponse);
+  rpc CloseAdjustment(ID) returns (AdjustmentResponse);
+  rpc GetAdjustmentByID(ID) returns (AdjustmentResponse);
+  rpc ListAdjustments(GetAdjustmentRequest) returns (AdjustmentList);
+
+  rpc GetWorkerAllInfo(ID) returns (WorkerAllInfo);
+
 }
+
+
+message Pagination {
+  int64 limit = 1;
+  int64 page = 2;
+  string sort_field = 3;
+  string order = 4;
+}
+
+message SalaryRequest {
+  string user_id = 1;
+  string currency_code = 2;
+  double amount = 3;
+  string salary_date = 4;
+  string company_id = 5;
+}
+
+message SalaryUpdate {
+  string salary_id = 1;
+  string currency_code = 2;
+  double amount = 3;
+  string salary_date = 4;
+  string company_id = 5;
+}
+
+message SalaryResponse {
+  string salary_id = 1;
+  string user_id = 2;
+  string first_name = 3;
+  string last_name = 4;
+  string currency_code = 5;
+  double amount = 6;
+  string salary_date = 7;
+  string created_at = 8;
+  string updated_at = 9;
+  string company_id = 10;
+}
+
+message GetSalaryList {
+  repeated SalaryResponse salaries = 1;
+}
+
+message GetSalaryRequest {
+  Pagination pagination = 1;
+  string company_id = 2;
+}
+
+
+message AdjustmentRequest {
+  string user_id = 1;
+  string adjustment_type = 2;
+  string currency_code = 3;
+  double amount = 4;
+  string adjustment_date = 5;
+  string company_id = 6;
+}
+
+message AdjustmentResponse {
+  string adjustment_id = 1;
+  string user_id = 2;
+  string first_name = 3;
+  string last_name = 4;
+  string adjustment_type = 5;
+  string currency_code = 6;
+  double amount = 7;
+  string adjustment_date = 8;
+  bool is_active = 9;
+  string created_at = 10;
+  string updated_at = 11;
+  string company_id = 12;
+}
+
+message AdjustmentList {
+  repeated AdjustmentResponse adjustments = 1;
+}
+
+message GetAdjustmentRequest {
+  Pagination pagination = 1;
+  string adjustment_type = 2;
+  bool is_active = 3;
+  string company_id = 4;
+}
+
+message WorkerAllInfo {
+  string user_id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string phone_number = 4;
+  string email = 5;
+  string role = 6;
+  SalaryResponse current_salary = 7;
+  repeated AdjustmentResponse adjustments = 9;
+  string created_at = 10;
+  string updated_at = 11;
+}
+
+message ID {
+  string id = 1;
+  string company_id = 2;
+}
+
+// Other messages ----------------------------
 message ClientRequest {
   string full_name = 1;
   string address = 2;

@@ -10,21 +10,19 @@ service CompanyService {
   rpc UpdateCompany (UpdateCompanyRequest) returns (CompanyResponse);
   rpc DeleteCompany (DeleteCompanyRequest) returns (Message);
   rpc ListCompanies (ListCompaniesRequest) returns (ListCompaniesResponse);
+
   rpc ListCompanyUsers (ListCompanyUsersRequest) returns (ListCompanyUsersResponse);
   rpc CreateUserToCompany (CreateUserToCompanyRequest) returns (Id);
 
-  // Branch CRUD Operations
   rpc CreateBranch (CreateBranchRequest) returns (BranchResponse);
   rpc GetBranch (GetBranchRequest) returns (BranchResponse);
   rpc UpdateBranch (UpdateBranchRequest) returns (BranchResponse);
   rpc DeleteBranch (DeleteBranchRequest) returns (Message);
   rpc ListBranches (ListBranchesRequest) returns (ListBranchesResponse);
 
-  rpc CreateCompanyBalance (CompanyBalanceRequest) returns (CompanyBalanceResponse);
-  rpc GetCompanyBalance (Id) returns (CompanyBalanceResponse);
-  rpc UpdateCompanyBalance (CompanyBalanceRequest) returns (CompanyBalanceResponse);
-  rpc GetUsersBalanceList (FilterCompanyBalanceRequest) returns (CompanyBalanceListResponse);
-  rpc DeleteCompanyBalance (Id) returns (Message);
+  rpc ReplenishmentCompany(ReplenishmentRequest) returns (ReplenishmentResponse);
+  rpc GetCompanyBalance(Id) returns (CompanyBalance);
+  rpc GetTransactionHistory(TransactionHistoryRequest) returns (TransactionHistoryRes);
 
   rpc SendSMS(SmsRequest) returns (Message);
 }
@@ -151,24 +149,42 @@ message Message {
   string message = 1;
 }
 
-message CompanyBalanceRequest {
-  string company_id = 1;
-  int64 balance = 2;
-}
-message CompanyBalanceResponse {
-  string company_id = 1;
-  int64 balance = 2;
-}
-message FilterCompanyBalanceRequest {
-
-  int32 page = 1;
-  int32 limit = 2;
-}
-message CompanyBalanceListResponse {
-  repeated CompanyBalanceResponse users = 1;
-}
 message SmsRequest{
   string phone = 1;
   string message = 2;
   string company_id = 3;
+}
+
+message ReplenishmentRequest {
+  string company_id = 1;
+  double amount = 2;
+}
+
+message ReplenishmentResponse {
+  bool success = 1;
+  string message = 2;
+  double new_balance = 3;
+}
+
+message CompanyBalance {
+  double balance = 1;
+  string status = 2;
+  string next_due_date = 3;
+}
+
+message TransactionHistoryRequest {
+  string company_id = 1;
+  string start_date = 2;
+  string end_date = 3;
+}
+
+message Transaction {
+  string transaction_id = 1;
+  string transaction_date = 2;
+  string category = 3;
+  double amount = 4;
+}
+
+message TransactionHistoryRes {
+  repeated Transaction transactions = 1;
 }
