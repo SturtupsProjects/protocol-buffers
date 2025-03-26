@@ -49,12 +49,6 @@ message AdjustmentUpdate {
   string company_id = 6;
 }
 
-message Pagination {
-  int64 limit = 1;
-  int64 page = 2;
-  string sort_field = 3;
-  string order = 4;
-}
 
 message SalaryRequest {
   string user_id = 1;
@@ -91,8 +85,11 @@ message GetSalaryList {
 }
 
 message GetSalaryRequest {
-  Pagination pagination = 1;
-  string company_id = 2;
+  int64 limit = 1;
+  int64 page = 2;
+  string sort_field = 3;
+  string order = 4;
+  string company_id = 5;
 }
 
 
@@ -126,10 +123,13 @@ message AdjustmentList {
 }
 
 message GetAdjustmentRequest {
-  Pagination pagination = 1;
-  string adjustment_type = 2;
-  string is_active = 3;
-  string company_id = 4;
+  int64 limit = 1;
+  int64 page = 2;
+  string sort_field = 3;
+  string order = 4;
+  string adjustment_type = 5;
+  string is_active = 6;
+  string company_id = 7;
 }
 
 message WorkerAllInfo {
