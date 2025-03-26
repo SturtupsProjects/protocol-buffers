@@ -31,7 +31,7 @@ service AuthService {
 
   // Methods for Bonuses
   rpc CreateAdjustment(AdjustmentRequest) returns (AdjustmentResponse);
-  rpc UpdateAdjustment(AdjustmentRequest) returns (AdjustmentResponse);
+  rpc UpdateAdjustment(AdjustmentUpdate) returns (AdjustmentResponse);
   rpc CloseAdjustment(ID) returns (AdjustmentResponse);
   rpc GetAdjustmentByID(ID) returns (AdjustmentResponse);
   rpc ListAdjustments(GetAdjustmentRequest) returns (AdjustmentList);
@@ -40,6 +40,14 @@ service AuthService {
 
 }
 
+message AdjustmentUpdate {
+  string adjustment_id = 1;
+  string adjustment_type = 2;
+  string currency_code = 3;
+  double amount = 4;
+  string adjustment_date = 5;
+  string company_id = 6;
+}
 
 message Pagination {
   int64 limit = 1;
