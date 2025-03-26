@@ -69,12 +69,13 @@ message SalaryResponse {
   string user_id = 2;
   string first_name = 3;
   string last_name = 4;
-  string currency_code = 5;
-  double amount = 6;
-  string salary_date = 7;
-  string created_at = 8;
-  string updated_at = 9;
-  string company_id = 10;
+  string phone_number = 5;
+  string currency_code = 6;
+  double amount = 7;
+  string salary_date = 8;
+  string created_at = 9;
+  string updated_at = 10;
+  string company_id = 11;
 }
 
 message GetSalaryList {
@@ -101,14 +102,15 @@ message AdjustmentResponse {
   string user_id = 2;
   string first_name = 3;
   string last_name = 4;
-  string adjustment_type = 5;
-  string currency_code = 6;
-  double amount = 7;
-  string adjustment_date = 8;
-  bool is_active = 9;
-  string created_at = 10;
-  string updated_at = 11;
-  string company_id = 12;
+  string phone_number = 5;
+  string adjustment_type = 6;
+  string currency_code = 7;
+  double amount = 8;
+  string adjustment_date = 9;
+  string is_active = 10;
+  string created_at = 11;
+  string updated_at = 12;
+  string company_id = 13;
 }
 
 message AdjustmentList {
@@ -118,7 +120,7 @@ message AdjustmentList {
 message GetAdjustmentRequest {
   Pagination pagination = 1;
   string adjustment_type = 2;
-  bool is_active = 3;
+  string is_active = 3;
   string company_id = 4;
 }
 
@@ -129,10 +131,29 @@ message WorkerAllInfo {
   string phone_number = 4;
   string email = 5;
   string role = 6;
-  SalaryResponse current_salary = 7;
-  repeated AdjustmentResponse adjustments = 9;
-  string created_at = 10;
-  string updated_at = 11;
+  Salary salary = 7;
+  repeated Adjustment adjustments = 8;
+  string created_at = 9;
+  string updated_at = 10;
+  string company_id = 11;
+}
+
+message Adjustment {
+  string adjustment_id = 1;
+  string adjustment_type = 2;
+  string currency_code = 3;
+  double amount = 4;
+  string adjustment_date = 5;
+  string is_active = 6;
+  string created_at = 7;
+  string updated_at = 8;
+}
+
+message Salary {
+  string salary_id = 1;
+  string currency_code = 2;
+  double amount = 3;
+  string salary_date = 4;
 }
 
 message ID {
