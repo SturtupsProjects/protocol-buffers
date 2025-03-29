@@ -19,6 +19,8 @@ service DebtsService {
   rpc GetListDebts(FilterDebts) returns (DebtsList);
   rpc GetClientDebts(ClientID) returns (DebtsList);
 
+  rpc GetDebtsForExel(FilterExelDebt) returns (ExelDebtsList);
+
   rpc GetTotalDebtSum(CompanyID) returns (SumMoney);
   rpc GetUserTotalDebtSum(ClientID) returns (SumMoney);
 
@@ -29,6 +31,27 @@ service DebtsService {
 }
 
 // ----------------------- Messages -------------------
+
+message ExelDebtsList {
+  repeated ExelDebts debts = 1;
+}
+
+message ExelDebts {
+  string client_id = 1;
+  string client_full_name = 2;
+  string client_phone = 3;
+  double total_amount = 4;
+  double amount_paid = 5;
+  double debts_balance = 6;
+  string last_payment_date = 7;
+  string currency_code = 8;
+  string company_id = 9;
+}
+
+message FilterExelDebt {
+  string currency = 1;
+  string company_id = 3;
+}
 
 message UserPaymentsRes {
   repeated Payments payments = 1;
