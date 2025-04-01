@@ -57,7 +57,7 @@ message CategoryName {
   string name = 1;
   string company_id = 2; // Company ID added
   string branch_id = 3; // Added branch_id
-  string crated_by = 4;
+  string created_by = 4;
   int64 limit = 5;
   int64 page = 6;
 }
