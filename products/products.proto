@@ -57,8 +57,9 @@ message CategoryName {
   string name = 1;
   string company_id = 2; // Company ID added
   string branch_id = 3; // Added branch_id
-  int64 limit = 4;
-  int64 page = 5;
+  string crated_by = 4;
+  int64 limit = 5;
+  int64 page = 6;
 }
 
 // -------------------- Products ---------------------------------
@@ -202,7 +203,6 @@ message PurchaseID {
 }
 
 message FilterPurchase {
-  string product_name = 1;
   string supplier_id = 2;
   string purchased_by = 3;
   string company_id = 4; // Company ID added
@@ -211,6 +211,7 @@ message FilterPurchase {
   int64 limit = 7;
   int64 page = 8;
   string description = 9;
+  double total_cost = 10;
 }
 
 message PurchaseList {
@@ -291,6 +292,7 @@ message SaleFilter {
   int64 page = 7;
   string branch_id = 8; // Added branch_id
   string product_name = 9;
+  double total_price = 10;
 }
 
 message SaleList {
@@ -306,6 +308,18 @@ message StatisticReq {
   string description = 5;
   int64 limit = 6;
   int64 page = 7;
+}
+
+message CashFlowReq {
+  string company_id = 1;
+  string branch_id = 2; // Added branch_id
+  string start_date = 3;
+  string end_date = 4;
+  string transaction_type = 5;
+  string payment_method = 6;
+  string description = 7;
+  int64 limit = 8;
+  int64 page = 9;
 }
 
 message PriceProducts {
@@ -423,7 +437,9 @@ message TransferFilter {
   int64 page = 2;
   string branch_id = 3;
   string product_name = 4;
-  string company_id = 5;
+  string transferred_by = 5;
+  string description = 6;
+  string company_id = 7;
 }
 
 message TransferList {
@@ -503,7 +519,7 @@ service Products {
   rpc DeleteSales(SaleID) returns (Message);
 
   // -------------------- Cash Flow ----------------------------
-  rpc GetCashFlow(StatisticReq) returns (ListCashFlow);
+  rpc GetCashFlow(CashFlowReq) returns (ListCashFlow);
   rpc CreateIncome(CashFlowRequest) returns (CashFlow);
   rpc CreateExpense(CashFlowRequest) returns (CashFlow);
 
