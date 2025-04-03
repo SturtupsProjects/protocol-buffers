@@ -62,7 +62,7 @@ message Payments {
   string payment_id = 2;
   string payment_date = 3;
   double payment_amount = 5;
-  string payment_type = 6;
+  string pay_type = 6;
 }
 
 message CompanyID {
@@ -88,7 +88,7 @@ message   Payment {
   string id = 1;
   string installment_id = 2;
   string payment_date = 3;
-  string payment_type = 4;
+  string pay_type = 4;
   double payment_amount = 5;
   string created_at = 6;
 }
@@ -124,7 +124,7 @@ message FilterDebts {
 
 message PayDebtsReq {
   string debt_id = 1;
-  string payment_type = 2;
+  string pay_type = 2;
   double paid_amount = 3;
   string company_id = 4;
 }
@@ -136,7 +136,7 @@ message DebtsID {
 
 message PayDebtsID {
   string id = 1;
-  string payment_type = 2;
+  string pay_type = 2;
 }
 
 message Debts {
