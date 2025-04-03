@@ -23,7 +23,7 @@ service DebtsService {
   rpc GetTotalDebtSum(CompanyID) returns (SumMoney);
 
   rpc GetPayment(PaymentID) returns (Payment);
-  rpc GetPaymentsByDebtsId(DebtsID) returns (PaymentList);
+  rpc GetPaymentsByDebtsId(PayDebtsID) returns (PaymentList);
   rpc GetPayments(FilterPayment) returns (PaymentList);
   rpc GetUserPayments(ClientID) returns (UserPaymentsRes);
 
@@ -134,6 +134,11 @@ message DebtsID {
   string company_id = 2;
 }
 
+message PayDebtsID {
+  string id = 1;
+  string payment_type = 2;
+}
+
 message Debts {
   string id = 1;
   string client_id = 2;
@@ -192,6 +197,7 @@ message ClientUpdate {
 message ClientID {
   string company_id = 1;
   string id = 2;
+  string debt_type = 3;
 }
 
 message Client {
