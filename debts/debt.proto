@@ -17,17 +17,17 @@ service DebtsService {
   rpc GetDebts(DebtsID) returns (Debts);
   rpc PayDebts(PayDebtsReq) returns (Debts);
   rpc GetListDebts(FilterDebts) returns (DebtsList);
+
   rpc GetClientDebts(ClientID) returns (DebtsList);
-
-  rpc GetDebtsForExel(FilterExelDebt) returns (ExelDebtsList);
-
-  rpc GetTotalDebtSum(CompanyID) returns (SumMoney);
   rpc GetUserTotalDebtSum(ClientID) returns (SumMoney);
+  rpc GetTotalDebtSum(CompanyID) returns (SumMoney);
 
   rpc GetPayment(PaymentID) returns (Payment);
-  rpc GetPaymentsByDebtsId(DebtsID) returns (PaymentList);
+  rpc GetPaymentsByDebtsId(PayDebtsID) returns (PaymentList);
   rpc GetPayments(FilterPayment) returns (PaymentList);
   rpc GetUserPayments(ClientID) returns (UserPaymentsRes);
+
+  rpc GetDebtsForExel(FilterExelDebt) returns (ExelDebtsList);
 }
 
 // ----------------------- Messages -------------------
@@ -62,10 +62,12 @@ message Payments {
   string payment_id = 2;
   string payment_date = 3;
   double payment_amount = 5;
+  string pay_type = 6;
 }
 
 message CompanyID {
   string id = 1;
+  string debt_type = 2;
 }
 
 message SumMoney {
@@ -82,12 +84,13 @@ message PaymentList {
   repeated Payment payments = 1;
 }
 
-message Payment {
+message   Payment {
   string id = 1;
   string installment_id = 2;
   string payment_date = 3;
-  double payment_amount = 4;
-  string created_at = 5;
+  string pay_type = 4;
+  double payment_amount = 5;
+  string created_at = 6;
 }
 
 message PaymentID {
@@ -110,19 +113,20 @@ message DebtsList {
 
 message FilterDebts {
   string is_fully_pay = 1;
-  double total_amount_min = 2;
-  double total_amount_max = 3;
-  string currency_code = 4;
-  string company_id = 5;
-  string description = 6;
-  int32 page = 7;
-  int32 limit = 8;
+  bool no_paid_debt = 2;
+  string currency_code = 3;
+  string description = 4;
+  int32 page = 5;
+  int32 limit = 6;
+  string debt_type = 7;
+  string company_id = 8;
 }
 
 message PayDebtsReq {
   string debt_id = 1;
-  double paid_amount = 2;
-  string company_id = 3;
+  string pay_type = 2;
+  double paid_amount = 3;
+  string company_id = 4;
 }
 
 message DebtsID {
@@ -130,29 +134,41 @@ message DebtsID {
   string company_id = 2;
 }
 
+message PayDebtsID {
+  string id = 1;
+  string pay_type = 2;
+}
+
 message Debts {
   string id = 1;
   string client_id = 2;
   string client_name = 3;
   string client_phone = 4;
-  double total_amount = 5;
-  double amount_paid = 6;
-  string last_payment_date = 7;
-  bool is_fully_paid = 8;
-  string created_at = 9;
-  string currency_code = 10;
-  string company_id = 11;
+  string sale_id = 5;
+  double total_amount = 6;
+  double amount_paid = 7;
+  double balance_of_debt = 8;
+  string last_payment_date = 9;
+  bool is_fully_paid = 10;
+  string currency_code = 11;
+  string debt_type = 12;
+  string should_pay_at = 13;
+  string created_at = 14;
+  string company_id = 15;
 }
 
 message DebtsRequest {
   string client_id = 1;
-  double total_amount = 2;
-  string currency_code = 3;
-  string company_id = 4;
+  string sale_id = 2;
+  double total_amount = 3;
+  string currency_code = 4;
+  string debt_type = 5; // creditor or debtor
+  string should_pay_at = 6;
+  string company_id = 7;
 }
 
 
-// Client Messages
+// ---------- Client messages --------------
 message ClientList {
   repeated Client clients = 1;
 }
@@ -181,6 +197,7 @@ message ClientUpdate {
 message ClientID {
   string company_id = 1;
   string id = 2;
+  string debt_type = 3;
 }
 
 message Client {
