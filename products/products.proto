@@ -484,6 +484,22 @@ message BranchIncomeRes {
   double total = 2; // Общий доход по всем филиалам
 }
 
+// Request to fetch client dashboard
+message GetClientDashboardRequest {
+  string company_id = 1;
+  string branch_id = 2;
+  string client_id = 3;
+}
+
+message GetClientDashboardResponse {
+  double total_purchase_sum = 1;
+  double average_receipt = 2;
+  double average_discount = 3;
+  double average_product_count = 4;
+  double top_transaction = 5;
+  int32 visit_count = 6;
+}
+
 // -------------------- Services ---------------------------------
 service Products {
 
@@ -543,6 +559,7 @@ service Products {
   rpc GetTopClients(GetTopEntitiesRequest) returns (GetTopEntitiesResponse);
   rpc GetTopSuppliers(GetTopEntitiesRequest) returns (GetTopEntitiesResponse);
 
+  rpc GetClientDashboard(GetClientDashboardRequest) returns (GetClientDashboardResponse);
   // ------------------------ Graph Statistics -----------------
   rpc GetSaleStatistics(SaleStatisticsReq) returns (SaleStatistics);
   rpc GetBranchIncome(BranchIncomeReq) returns (BranchIncomeRes);
