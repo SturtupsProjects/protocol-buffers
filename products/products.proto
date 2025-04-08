@@ -500,6 +500,19 @@ message GetClientDashboardResponse {
   int32 visit_count = 6;
 }
 
+message GetProductsDashboardReq {
+  string company_id = 1;
+  string branch_id = 2;
+  string currency = 3;
+}
+
+message GetProductsDashboardRes {
+  int64 product_items = 1;
+  int64 product_units = 2;
+  double amount_delivery_price = 3;
+  double amount_sale_price = 4;
+}
+
 // -------------------- Services ---------------------------------
 service Products {
 
@@ -563,4 +576,6 @@ service Products {
   // ------------------------ Graph Statistics -----------------
   rpc GetSaleStatistics(SaleStatisticsReq) returns (SaleStatistics);
   rpc GetBranchIncome(BranchIncomeReq) returns (BranchIncomeRes);
+
+  rpc GetProductDashboard(GetProductsDashboardReq) returns (GetProductsDashboardRes);
 }
