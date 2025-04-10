@@ -87,7 +87,7 @@ message CreateProductRequest {
   double standard_price = 6; // Changed to double
   string company_id = 7; // Company ID added
   string created_by = 8;
-  string total_count = 9;
+  int64 total_count = 9;
   string branch_id = 10; // Added branch_id
 }
 
